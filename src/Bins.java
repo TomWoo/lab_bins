@@ -1,10 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 
 /**
  * Runs a number of algorithms that try to fit files onto disks.
@@ -26,6 +27,14 @@ public class Bins {
         return results;
     }
 
+    public void fitDisksAndPrint (List<Integer> in) {
+        List<Integer> out = in.stream()
+                .sorted(Comparator.comparingInt(Integer::intValue))
+                .collect(Collectors.toList());
+        in = out;
+
+    }
+
     /**
      * The main program.
      */
@@ -45,7 +54,8 @@ public class Bins {
                 pq.poll();
                 d.add(size);
                 pq.add(d);
-            } else {
+            }
+            else {
                 Disk d2 = new Disk(diskId);
                 diskId++;
                 d2.add(size);
@@ -73,7 +83,8 @@ public class Bins {
                 pq.poll();
                 d.add(size);
                 pq.add(d);
-            } else {
+            }
+            else {
                 Disk d2 = new Disk(diskId);
                 diskId++;
                 d2.add(size);
